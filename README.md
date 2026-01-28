@@ -355,3 +355,14 @@ For issues, questions, or contributions:
 ---
 
 **Enjoy hands-free French dictation! 🎤**
+
+## License
+
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL v3)**.
+
+See the [LICENSE](LICENSE) file for details.
+
+### What this means
+- ✅ You can use this for personal use
+- ✅ You can edit and modify the code
+- ⚠️ If you use this commercially or deploy it as a service/SaaS, you **MUST** share your source code and modifications under the same license.
