@@ -15395,3 +15395,120 @@ Audio → [Whisper sur CPU] → Texte brut
 
 ---
 
+_**User (2026-01-28 15:12Z)**_
+
+on va rester sur openAI pour le moment. Le dernier truc a agérer, c'est que l'app tourne dans VSCode. Il faudrait maintenant pouvoir la lancer sans passer par VS Code. Mais avant tout ça, on va commit et push ce qui a été fait
+
+---
+
+_**Agent (model copilot/auto)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="mcp_gitkraken_git_status">
+<details>
+<summary>Tool use: **mcp_gitkraken_git_status**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "input",
+  "rawInput": {
+    "directory": "f:\\src\\whisper-dictation"
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "mcp_gitkraken_git_status",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Running &#96;git_status&#96;",
+  "pastTenseMessage": "Ran &#96;git_status&#96; ",
+  "resultDetails": {
+    "input": "{\n  \"directory\": \"f:\\\\src\\\\whisper-dictation\"\n}",
+    "output": [
+      {
+        "type": "embed",
+        "isText": true,
+        "value": "{\"data\":{\"output\":\"On branch main\\nYour branch is up to date with 'origin/main'.\\n\\nChanges not staged for commit:\\n  (use \\\"git add \\u003cfile\\u003e...\\\" to update what will be committed)\\n  (use \\\"git restore \\u003cfile\\u003e...\\\" to discard changes in working directory)\\n\\tmodified:   .env.example\\n\\tmodified:   \\\".specstory/history/2026-01-28_10-27Z-r\\\\303\\\\264le-des-agents-et-d\\\\303\\\\251marrage-dans-bmad.md\\\"\\n\\tmodified:   README.md\\n\\tmodified:   requirements.txt\\n\\tmodified:   src/audio_capture.py\\n\\tmodified:   src/config.py\\n\\tmodified:   src/gui_feedback.py\\n\\tmodified:   src/hotkey_manager.py\\n\\tmodified:   src/main.py\\n\\tmodified:   src/transcription.py\\n\\nUntracked files:\\n  (use \\\"git add \\u003cfile\\u003e...\\\" to include in what will be committed)\\n\\tsrc/text_cleaner_base.py\\n\\tsrc/text_cleaner_factory.py\\n\\tsrc/text_cleaner_ollama.py\\n\\tsrc/text_cleaner_openai.py\\n\\ttools/\\n\\nno changes added to commit (use \\\"git add\\\" and/or \\\"git commit -a\\\")\"}}"
+      }
+    ],
+    "isError": false
+  },
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="mcp_gitkraken_git_add_or_commit">
+<details>
+<summary>Tool use: **mcp_gitkraken_git_add_or_commit**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "input",
+  "rawInput": {
+    "directory": "f:\\src\\whisper-dictation",
+    "action": "add"
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "mcp_gitkraken_git_add_or_commit",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Running &#96;git_add_or_commit&#96;",
+  "pastTenseMessage": "Ran &#96;git_add_or_commit&#96; ",
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+L'utilisateur veut :
+1. Commit et push les changements
+2. Puis rendre l'app exécutable sans VS Code
+
+D'abord, je vais vérifier le statut git, faire un commit et un push. Puis je vais créer un script de lancement standalone.
+
+Vérifions d'abord le statut git.Parfait ! On va committer tous les changements : 
+
+---
+
