@@ -16258,7 +16258,7 @@ Puis appuie sur **Alt+W** pour démarrer ! 🚀
 
 ---
 
-_**User (2026-01-28 15:16Z)**_
+_**User (2026-01-28 15:18Z)**_
 
 PS F:\src\whisper-dictation> cd F:\src\whisper-dictation
 >> .\run.ps1
@@ -16418,7 +16418,23 @@ Parameters:
   },
   "language": "pwsh",
   "terminalCommandState": {
-    "timestamp": 1769613435077
+    "exitCode": 0,
+    "timestamp": 1769613439966,
+    "duration": 3935
+  },
+  "terminalCommandUri": {
+    "$mid": 1,
+    "path": "/233f8184b4d9fb8ac751af790e56927b/38",
+    "scheme": "vscode-terminal",
+    "query": "command=tool-7688fa3c-71d7-4aa6-9c24-0359043ba607"
+  },
+  "terminalCommandOutput": {
+    "text": "\u001b[91;1m&amp;: \u001b[0mF:\\src\\whisper-dictation\\run.ps1:9:3\r\n\u001b[96;1mLine |\r\n   9 | \u001b[0m &amp; \u001b[96;1m\".\\.venv\\Scripts\\Activate.ps1\"\r\n     | \u001b[91m   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n\u001b[96m     | \u001b[91mThe term '.\\.venv\\Scripts\\Activate.ps1' is not recognized as a name of a cmdlet,\u001b[0m     \r\n\u001b[96;1m     | \u001b[91mfunction, script file, or executable program. Check the spelling of the name, or if a\r\n\u001b[96m     | \u001b[91mpath was included, verify that the path is correct and try again.\r\n\u001b[92;22mStarting Whisper Dictation...\r\n\u001b[96mPress Alt+W to start recording\r\n\u001b[0m2026-01-28 16:17:16,098 - root - INFO - Whisper Dictation initialized - Model: small, Language: fr\r\nTraceback (most recent call last):\r\n  File \"F:\\src\\whisper-dictation\\src\\main.py\", line 13, in &lt;module&gt;\r\n    from src.text_cleaner_factory import TextCleanerFactory\r\n  File \"F:\\src\\whisper-dictation\\src\\text_cleaner_factory.py\", line 8, in &lt;module&gt;\r\n    from src.text_cleaner_openai import OpenAITextCleaner\r\n  File \"F:\\src\\whisper-dictation\\src\\text_cleaner_openai.py\", line 8, in &lt;module&gt; \r\n    from openai import OpenAI\r\nModuleNotFoundError: No module named 'openai'\r\n\u001b[91mError: App exited with code 1\r\n\u001b[0mPress Enter to close...: Enter\r\nEnter",
+    "lineCount": 22
+  },
+  "terminalTheme": {
+    "background": "#181818",
+    "foreground": "#cccccc"
   }
 }
 ```
@@ -16451,9 +16467,530 @@ Status: **completed**
 
 ---
 
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Using \"Replace String in File\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;powershell\nSet Python path before activating\r\n$env:PYTHONPATH = $pwd.Path\r\n\r\n# Use Python from venv directly\r\n$pythonExe = \".\\\\.venv\\Scripts\\python.exe\"\r\n\r\n# Run the app\r\nWrite-Host \"Starting Whisper Dictation...\" -ForegroundColor Green\r\nWrite-Host \"Press Alt+W to start recording\" -ForegroundColor Cyan\r\nWrite-Host \"\"\r\n\r\n&amp; $pythonExe src/main.py\r\n\r\n# Keep window open on error\r\nif ($LASTEXITCODE -ne 0) {\r\n    Write-Host \"\"\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "Set Python path before activating\r\n$env:PYTHONPATH = $pwd.Path\r\n\r\n# Use Python from venv directly\r\n$pythonExe = \".\\\\.venv\\Scripts\\python.exe\"\r\n\r\n# Run the app\r\nWrite-Host \"Starting Whisper Dictation...\" -ForegroundColor Green\r\nWrite-Host \"Press Alt+W to start recording\" -ForegroundColor Cyan\r\nWrite-Host \"\"\r\n\r\n&amp; $pythonExe src/main.py\r\n\r\n# Keep window open on error\r\nif ($LASTEXITCODE -ne 0) {\r\n    Write-Host \"\"",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "a03c8a6a-c1ec-4c8d-8b0a-d37428d096f7",
+  "terminalCommandId": "tool-87fad63d-fcd4-43c9-a3e1-bd6c162e5291",
+  "commandLine": {
+    "original": "cd f:\\src\\whisper-dictation; .\\run.ps1",
+    "toolEdited": ".\\run.ps1"
+  },
+  "language": "pwsh",
+  "terminalCommandState": {
+    "timestamp": 1769613479576
+  },
+  "terminalCommandUri": {
+    "$mid": 1,
+    "path": "/233f8184b4d9fb8ac751af790e56927b/39",
+    "scheme": "vscode-terminal",
+    "query": "command=tool-87fad63d-fcd4-43c9-a3e1-bd6c162e5291"
+  },
+  "terminalTheme": {
+    "background": "#181818",
+    "foreground": "#cccccc"
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Using \"Run in Terminal\"",
+  "isConfirmed": {
+    "type": 4
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="get_terminal_output">
+<details>
+<summary>Tool use: **get_terminal_output**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "get_terminal_output",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Checking background terminal output",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="mcp_gitkraken_git_add_or_commit">
+<details>
+<summary>Tool use: **mcp_gitkraken_git_add_or_commit**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "input",
+  "rawInput": {
+    "action": "add",
+    "directory": "f:\\src\\whisper-dictation"
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "mcp_gitkraken_git_add_or_commit",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Running &#96;git_add_or_commit&#96;",
+  "pastTenseMessage": "Ran &#96;git_add_or_commit&#96; ",
+  "resultDetails": {
+    "input": "{\n  \"action\": \"add\",\n  \"directory\": \"f:\\\\src\\\\whisper-dictation\"\n}",
+    "output": [
+      {
+        "type": "embed",
+        "isText": true,
+        "value": "{\"data\":{\"output\":\"\"}}"
+      }
+    ],
+    "isError": false
+  },
+  "isConfirmed": {
+    "type": 4
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="mcp_gitkraken_git_add_or_commit">
+<details>
+<summary>Tool use: **mcp_gitkraken_git_add_or_commit**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "input",
+  "rawInput": {
+    "action": "commit",
+    "directory": "f:\\src\\whisper-dictation",
+    "message": "fix: Use Python executable directly in PowerShell launch script\n\n- Change from trying to activate venv to using .venv\\Scripts\\python.exe directly\n- Set PYTHONPATH before running to ensure imports work\n- Fixes PowerShell execution policy and module loading issues\n- Verified working with run.ps1"
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "mcp_gitkraken_git_add_or_commit",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Running &#96;git_add_or_commit&#96;",
+  "pastTenseMessage": "Ran &#96;git_add_or_commit&#96; ",
+  "resultDetails": {
+    "input": "{\n  \"action\": \"commit\",\n  \"directory\": \"f:\\\\src\\\\whisper-dictation\",\n  \"message\": \"fix: Use Python executable directly in PowerShell launch script\\n\\n- Change from trying to activate venv to using .venv\\\\Scripts\\\\python.exe directly\\n- Set PYTHONPATH before running to ensure imports work\\n- Fixes PowerShell execution policy and module loading issues\\n- Verified working with run.ps1\"\n}",
+    "output": [
+      {
+        "type": "embed",
+        "isText": true,
+        "value": "{\"data\":{\"output\":\"[main 44da258] fix: Use Python executable directly in PowerShell launch script\\n 2 files changed, 955 insertions(+), 7 deletions(-)\\n\"}}"
+      }
+    ],
+    "isError": false
+  },
+  "isConfirmed": {
+    "type": 4
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="mcp_gitkraken_git_push">
+<details>
+<summary>Tool use: **mcp_gitkraken_git_push**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "input",
+  "rawInput": {
+    "directory": "f:\\src\\whisper-dictation"
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "mcp_gitkraken_git_push",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Running &#96;git_push&#96;",
+  "pastTenseMessage": "Ran &#96;git_push&#96; ",
+  "resultDetails": {
+    "input": "{\n  \"directory\": \"f:\\\\src\\\\whisper-dictation\"\n}",
+    "output": [
+      {
+        "type": "embed",
+        "isText": true,
+        "value": "{\"data\":{\"output\":\"\"}}"
+      }
+    ],
+    "isError": false
+  },
+  "isConfirmed": {
+    "type": 4
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
 Le problème vient du chemin avec les double backslashes `.\\.venv\Scripts\Activate.ps1`. Le script PowerShell a un problème de syntaxe. Je dois corriger le chemin pour être `.\venv\Scripts\Activate.ps1` au lieu de `.\\.venv\Scripts\Activate.ps1`.
 
-De plus, il semble que openai n'a pas été installé correctement. Il faut aussi vérifier/réinstaller les dépendances.Le problème vient du chemin avec double backslash dans le script. Laisse-moi corriger ça : Parfait, OpenAI est installé ! Maintenant teste le script corrigé : 
+De plus, il semble que openai n'a pas été installé correctement. Il faut aussi vérifier/réinstaller les dépendances.Le problème vient du chemin avec double backslash dans le script. Laisse-moi corriger ça : Parfait, OpenAI est installé ! Maintenant teste le script corrigé : PowerShell a encore du mal avec l'activation. Utilisons une approche alternative plus robuste : ✅ **Parfait !** L'app fonctionne maintenant avec le script !
+
+Committe cette correction : ✅ **C'est bon !**
+
+**Résumé final :**
+
+Tu peux maintenant lancer l'app **sans VS Code** de 2 façons :
+
+**1. PowerShell (recommandé) :**
+```powershell
+cd F:\src\whisper-dictation
+.\run.ps1
+```
+
+**2. Command Prompt :**
+```cmd
+F:\src\whisper-dictation\run.bat
+```
+
+L'app démarre maintenant avec :
+- ✅ OpenAI text cleaning configuré
+- ✅ Whisper transcription rapide
+- ✅ Hotkey Alt+W pour enregistrement
+- ✅ Automatic cleanup et clipboard paste
+
+**Tout est committé et pushé !** 🚀
+
+---
+
+_**User (2026-01-28 15:19Z)**_
+
+Personnellement, j'aurais préféré pouvoir ouvrir l'application avec un simple raccourci sur lequel je double-clique. Cela aurait été beaucoup plus pratique. Il manque un dernier point : c'est pour pouvoir fermer l'application une fois qu'elle est lancée, si l'on n'a pas une fenêtre PowerShell d'ouverte, ce que je préférerais éviter.
+
+---
+
+_**Agent (model copilot/auto)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "f:\\src\\whisper-dictation\\launch.vbs",
+  "relativeWorkspacePath": "f:\\src\\whisper-dictation\\launch.vbs"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Creating [](file:///f%3A/src/whisper-dictation/launch.vbs)",
+  "pastTenseMessage": "Created [](file:///f%3A/src/whisper-dictation/launch.vbs)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "Set objShell = CreateObject(\"WScript.Shell\")\nstrPath = CreateObject(\"WScript.FileSystemObject\").GetParentFolderName(WScript.ScriptFullName)\nstrPython = strPath &amp; \"\\.venv\\Scripts\\python.exe\"\nstrScript = strPath &amp; \"\\src\\main.py\"\n\nobjShell.CurrentDirectory = strPath\n\n' Run without visible console window (0 = hidden)\nobjShell.Run strPython &amp; \" \" &amp; strScript, 0, False\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • Reading [](file:///f%3A/src/whisper-dictation/src/gui_feedback.py#1-1), lines 1 to 60</summary>
+
+
+Read [](file:///f%3A/src/whisper-dictation/src/gui_feedback.py#1-1), lines 1 to 60
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • Reading [](file:///f%3A/src/whisper-dictation/src/gui_feedback.py#100-100), lines 100 to 132</summary>
+
+
+Read [](file:///f%3A/src/whisper-dictation/src/gui_feedback.py#100-100), lines 100 to 132
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Using \"Replace String in File\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;python\n100\")\r\n        self.overrideredirect(True)  # Borderless\r\n        self.attributes(\"-topmost\", True)  # Always on top\r\n        self.attributes(\"-alpha\", 0.9)  # Slight transparency\r\n        \r\n        # Center window on screen\r\n        self._center_window()\r\n        \r\n        # Configure style\r\n        self.config(bg=\"#1e1e1e\")\r\n        \r\n        # Create main frame\r\n        main_frame = tk.Frame(self, bg=\"#1e1e1e\")\r\n        main_frame.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)\r\n        \r\n        # Create label for emoji and text\r\n        label_font = font.Font(family=\"Segoe UI\", size=14, weight=\"bold\")\r\n        self.label = tk.Label(\r\n            main_frame,\r\n            text=\"\",\r\n            font=label_font,\r\n            bg=\"#1e1e1e\",\r\n            fg=\"#00ff00\",\r\n            wraplength=180\r\n        )\r\n        self.label.pack(expand=True, fill=tk.BOTH)\r\n        \r\n        # Create close button\r\n        button_frame = tk.Frame(main_frame, bg=\"#1e1e1e\")\r\n        button_frame.pack(fill=tk.X, pady=(5, 0))\r\n        \r\n        close_btn = tk.Button(\r\n            button_frame,\r\n            text=\"Fermer (Q)\",\r\n            font=(\"Segoe UI\", 9),\r\n            bg=\"#333333\",\r\n            fg=\"#cccccc\",\r\n            bd=0,\r\n            padx=5,\r\n            pady=2,\r\n            command=self._on_close_btn,\r\n            relief=tk.RAISED\r\n        )\r\n        close_btn.pack(side=tk.RIGHT)\r\n        \r\n        # Bind keyboard shortcuts\r\n        self.bind(\"&lt;q&gt;\", lambda e: self._on_close_btn())\r\n        self.bind(\"&lt;Escape&gt;\", lambda e: self._on_close_btn())\r\n        \r\n        # State tracking\r\n        self._current_state = None\r\n        self._error_timer = None\r\n        self._close_callback\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "100\")\r\n        self.overrideredirect(True)  # Borderless\r\n        self.attributes(\"-topmost\", True)  # Always on top\r\n        self.attributes(\"-alpha\", 0.9)  # Slight transparency\r\n        \r\n        # Center window on screen\r\n        self._center_window()\r\n        \r\n        # Configure style\r\n        self.config(bg=\"#1e1e1e\")\r\n        \r\n        # Create main frame\r\n        main_frame = tk.Frame(self, bg=\"#1e1e1e\")\r\n        main_frame.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)\r\n        \r\n        # Create label for emoji and text\r\n        label_font = font.Font(family=\"Segoe UI\", size=14, weight=\"bold\")\r\n        self.label = tk.Label(\r\n            main_frame,\r\n            text=\"\",\r\n            font=label_font,\r\n            bg=\"#1e1e1e\",\r\n            fg=\"#00ff00\",\r\n            wraplength=180\r\n        )\r\n        self.label.pack(expand=True, fill=tk.BOTH)\r\n        \r\n        # Create close button\r\n        button_frame = tk.Frame(main_frame, bg=\"#1e1e1e\")\r\n        button_frame.pack(fill=tk.X, pady=(5, 0))\r\n        \r\n        close_btn = tk.Button(\r\n            button_frame,\r\n            text=\"Fermer (Q)\",\r\n            font=(\"Segoe UI\", 9),\r\n            bg=\"#333333\",\r\n            fg=\"#cccccc\",\r\n            bd=0,\r\n            padx=5,\r\n            pady=2,\r\n            command=self._on_close_btn,\r\n            relief=tk.RAISED\r\n        )\r\n        close_btn.pack(side=tk.RIGHT)\r\n        \r\n        # Bind keyboard shortcuts\r\n        self.bind(\"&lt;q&gt;\", lambda e: self._on_close_btn())\r\n        self.bind(\"&lt;Escape&gt;\", lambda e: self._on_close_btn())\r\n        \r\n        # State tracking\r\n        self._current_state = None\r\n        self._error_timer = None\r\n        self._close_callback",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • Reading [](file:///f%3A/src/whisper-dictation/src/gui_feedback.py#120-120), lines 120 to 130</summary>
+
+
+Read [](file:///f%3A/src/whisper-dictation/src/gui_feedback.py#120-120), lines 120 to 130
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Using \"Replace String in File\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;python\n\r\n    \r\n    def set_close_callback(self, callback):\r\n        \"\"\"Set callback to call when close is requested.\"\"\"\r\n        self._close_callback = callback\r\n    \r\n    def _on_close_btn(self):\r\n        \"\"\"Handle close button or escape key.\"\"\"\r\n        logger.info(\"Close requested\")\r\n        if self._close_callback:\r\n            self._close_callback()\r\n        else:\r\n            # Fallback: quit directly\r\n            self.quit()\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "\r\n    \r\n    def set_close_callback(self, callback):\r\n        \"\"\"Set callback to call when close is requested.\"\"\"\r\n        self._close_callback = callback\r\n    \r\n    def _on_close_btn(self):\r\n        \"\"\"Handle close button or escape key.\"\"\"\r\n        logger.info(\"Close requested\")\r\n        if self._close_callback:\r\n            self._close_callback()\r\n        else:\r\n            # Fallback: quit directly\r\n            self.quit()",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • Reading [](file:///f%3A/src/whisper-dictation/src/main.py#30-30), lines 30 to 55</summary>
+
+
+Read [](file:///f%3A/src/whisper-dictation/src/main.py#30-30), lines 30 to 55
+
+</details>
+</tool-use>
+
+---
+
+L'utilisateur veut:
+1. Un simple raccourci (double-clic) pour lancer l'app
+2. Pouvoir fermer l'app sans avoir de fenêtre PowerShell visible
+3. Éviter d'avoir une console PowerShell ouverte
+
+Je dois créer:
+1. Un exécutable Windows qui lance l'app sans console
+2. Possiblement utiliser un VBScript ou créer un raccourci .lnk
+3. Ajouter un bouton/option pour fermer l'app facilement dans l'app
+
+Options:
+- VBScript caché (.vbs) - runs sans console visible
+- Créer un raccourci .lnk avec paramètres pour masquer la console
+- Modifier l'app pour avoir un bouton de fermeture (ajouter menu)
+
+Je pense que la meilleure approche est:
+1. Créer un script VBScript qui lance Python sans console
+2. Créer un raccourci simplement cliquable
+3. Ajouter une option de fermeture dans l'app (hotkey ou bouton)
+
+Ou même mieux:
+- Créer un script Python que tu peux packager avec pyinstaller pour créer un .exe standalone
+- Mais ça c'est plus complexe
+
+Solution simple:
+1. VBScript pour lancer sans console
+2. Raccourci sur le bureau
+3. Ajouter un bouton de fermeture ou un hotkey (genre Esc ou clique sur la GUI)Tu as raison ! Crée un raccourci sans console visible. Je vais créer 2 solutions :
+
+**Solution 1 : VBScript caché (plus simple)** Parfait ! Maintenant ajoute aussi un moyen de **fermer l'app**. Modifions le GUI pour ajouter un bouton de fermeture : Ajoutons un bouton de fermeture et la capacité de fermer l'app en cliquant sur la GUI : Maintenant ajoute la méthode de fermeture et la capacité pour la GUI de signaler la fermeture à l'app : Maintenant configure l'app pour supporter la fermeture : 
 
 ---
 

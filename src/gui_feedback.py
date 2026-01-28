@@ -19,7 +19,7 @@ class FeedbackWindow(tk.Tk):
         
         # Window configuration
         self.title("Whisper Dictation")
-        self.geometry("200x80")
+        self.geometry("200x100")
         self.overrideredirect(True)  # Borderless
         self.attributes("-topmost", True)  # Always on top
         self.attributes("-alpha", 0.9)  # Slight transparency
@@ -46,9 +46,32 @@ class FeedbackWindow(tk.Tk):
         )
         self.label.pack(expand=True, fill=tk.BOTH)
         
+        # Create close button
+        button_frame = tk.Frame(main_frame, bg="#1e1e1e")
+        button_frame.pack(fill=tk.X, pady=(5, 0))
+        
+        close_btn = tk.Button(
+            button_frame,
+            text="Fermer (Q)",
+            font=("Segoe UI", 9),
+            bg="#333333",
+            fg="#cccccc",
+            bd=0,
+            padx=5,
+            pady=2,
+            command=self._on_close_btn,
+            relief=tk.RAISED
+        )
+        close_btn.pack(side=tk.RIGHT)
+        
+        # Bind keyboard shortcuts
+        self.bind("<q>", lambda e: self._on_close_btn())
+        self.bind("<Escape>", lambda e: self._on_close_btn())
+        
         # State tracking
         self._current_state = None
         self._error_timer = None
+        self._close_callback = None
         self.withdraw()  # Hidden by default
         
         logger.info("FeedbackWindow initialized")
@@ -129,3 +152,16 @@ class FeedbackWindow(tk.Tk):
         if self._error_timer is not None:
             self.after_cancel(self._error_timer)
             self._error_timer = None
+    
+    def set_close_callback(self, callback):
+        """Set callback to call when close is requested."""
+        self._close_callback = callback
+    
+    def _on_close_btn(self):
+        """Handle close button or escape key."""
+        logger.info("Close requested")
+        if self._close_callback:
+            self._close_callback()
+        else:
+            # Fallback: quit directly
+            self.quit()

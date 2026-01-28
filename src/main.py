@@ -50,6 +50,9 @@ class WhisperDictationApp:
         self.clipboard = ClipboardManager()
         self.hotkey = HotkeyManager(hotkey_combo=HOTKEY, callback=self._on_hotkey)
         
+        # Set close callback
+        self.gui.set_close_callback(self.shutdown)
+        
         logger.info("WhisperDictationApp initialized")
     
     def run(self):
