@@ -103,14 +103,14 @@ class WhisperDictationApp:
         with self._state_lock:
             current_state = self._state
         
-        logger.info(f"🔑 Hotkey pressed - current state: {current_state}")
+        logger.info(f"[KEY] Hotkey pressed - current state: {current_state}")
         
         try:
             if current_state == "IDLE":
-                logger.info("→ Calling _start_listening()")
+                logger.info("[>] Calling _start_listening()")
                 self._start_listening()
             elif current_state == "LISTENING":
-                logger.info("→ Calling _stop_listening()")
+                logger.info("[>] Calling _stop_listening()")
                 self._stop_listening()
             else:
                 logger.warning(f"Hotkey ignored in state: {current_state}")
@@ -131,7 +131,7 @@ class WhisperDictationApp:
             self.audio.start_recording()
             logger.info("Showing GUI listening state")
             self.gui.show_listening()
-            logger.info("✅ Listening started successfully")
+            logger.info("[OK] Listening started successfully")
         except Exception as e:
             logger.error(f"Failed to start listening: {e}")
             self.gui.show_error("Mic indisponible")
