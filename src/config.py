@@ -18,16 +18,35 @@ HOTKEY = os.getenv("HOTKEY", "<alt>+w")
 MAX_RECORDING_SECONDS = int(os.getenv("MAX_RECORDING_SECONDS", "300"))
 MIN_RECORDING_SECONDS = float(os.getenv("MIN_RECORDING_SECONDS", "0.5"))
 
-# OpenAI API Configuration
+# Text Cleaning Configuration
+TEXT_CLEANER_BACKEND = os.getenv("TEXT_CLEANER_BACKEND", "disabled").lower()
+
+# Validate backend choice
+VALID_BACKENDS = ["disabled", "openai", "ollama"]
+if TEXT_CLEANER_BACKEND not in VALID_BACKENDS:
+    raise ValueError(
+        f"Invalid TEXT_CLEANER_BACKEND: '{TEXT_CLEANER_BACKEND}'. "
+        f"Valid options: {', '.join(VALID_BACKENDS)}"
+    )
+
+# OpenAI Configuration (required if backend is 'openai')
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
+if TEXT_CLEANER_BACKEND == "openai" and not OPENAI_API_KEY:
     raise ValueError(
         "OPENAI_API_KEY not found in environment. "
+        "Required when TEXT_CLEANER_BACKEND=openai. "
         "Please set it in .env file or as environment variable."
     )
 
-OPENAI_MODEL = "gpt-4o-mini"
-OPENAI_TIMEOUT = 10
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+OPENAI_TIMEOUT = int(os.getenv("OPENAI_TIMEOUT", "10"))
+
+# Ollama Configuration (used if backend is 'ollama')
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:3b")
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+
+# Backward compatibility flag
+USE_TEXT_CLEANER = TEXT_CLEANER_BACKEND != "disabled"
 
 # GUI Configuration
 GUI_WINDOW_WIDTH = 200
@@ -45,7 +64,7 @@ def setup_logging():
     
     # Create logger
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)  # Changed to DEBUG for troubleshooting
     
     # File handler
     file_handler = logging.FileHandler("whisper-dictation.log")

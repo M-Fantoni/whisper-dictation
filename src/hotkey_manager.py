@@ -24,7 +24,7 @@ class HotkeyManager:
         self._hotkey_combo = hotkey_combo
         self._callback = callback
         self._listener = None
-        self._lock = threading.Lock()
+        self._lock = threading.RLock()  # Changed to RLock to prevent deadlock with callback re-entry
         self._state = None  # Will be set by orchestrator
     
     def register(self, callback):
@@ -60,6 +60,7 @@ class HotkeyManager:
     
     def _handle_hotkey(self):
         """Internal handler for hotkey press with debouncing."""
+        print("DEBUG: Hotkey callback triggered!")  # Direct console output for debugging
         with self._lock:
             # Debounce: ignore hotkey if processing
             if self._state == "PROCESSING":

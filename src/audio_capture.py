@@ -41,12 +41,20 @@ class AudioCapture:
                 return
             
             try:
+                # Log active device information
+                default_device_idx = sd.default.device[0]
+                device_info = sd.query_devices(default_device_idx)
+                logger.info(f"Opening audio stream on device ID {default_device_idx}: {device_info['name']}")
+                logger.info(f"Device details: hostapi={device_info['hostapi']}, default_sr={device_info['default_samplerate']}, max_input_channels={device_info['max_input_channels']}")
+
                 self._buffer = []
                 self._sample_count = 0
                 self._is_recording = True
                 
                 # Create stream with callback for continuous recording
+                # EXPLICITLY specify device to ensure it's used
                 self._stream = sd.InputStream(
+                    device=default_device_idx,
                     samplerate=SAMPLE_RATE,
                     channels=AUDIO_CHANNELS,
                     dtype=AUDIO_DTYPE,
@@ -54,7 +62,9 @@ class AudioCapture:
                     callback=self._audio_callback
                 )
                 self._stream.start()
-                logger.info(f"Recording started - Sample rate: {SAMPLE_RATE}, Channels: {AUDIO_CHANNELS}")
+                
+                # Log actual stream properties after creation
+                logger.info(f"Stream started - Device: {self._stream.device}, SR: {self._stream.samplerate}, Channels: {self._stream.channels}, Dtype: {self._stream.dtype}")
             except Exception as e:
                 self._is_recording = False
                 logger.error(f"Failed to start recording: {e}")
@@ -104,12 +114,18 @@ class AudioCapture:
         """Internal callback for continuous audio stream (runs in stream thread)."""
         if status:
             logger.warning(f"Audio stream status: {status}")
-        
+
         with self._lock:
             if not self._is_recording:
                 return
             
             try:
+                # DEBUG: Log volume stats every ~1 second (assuming 4096 frames @ 16kHz is ~0.25s)
+                # No, let's just log max peak of this block if it's significant
+                peak = np.max(np.abs(indata))
+                if peak > 500: # Arbitrary threshold for "speech"
+                     logger.debug(f"Audio Frame Volume Peak: {peak}")
+                
                 # Check buffer overflow before appending
                 self._sample_count += frames
                 duration = self._sample_count / SAMPLE_RATE

@@ -63,7 +63,11 @@ class FeedbackWindow(tk.Tk):
         self.geometry(f"{width}x{height}+{x}+{y}")
     
     def show_listening(self):
-        """Show listening state."""
+        """Show listening state (thread-safe)."""
+        self.after(0, self._show_listening_impl)
+
+    def _show_listening_impl(self):
+        """Internal implementation of show_listening."""
         self._cancel_error_timer()
         self._current_state = "listening"
         self.label.config(text="🎤 Écoute...", fg="#00ff00")
@@ -71,7 +75,11 @@ class FeedbackWindow(tk.Tk):
         logger.debug("Showing listening state")
     
     def show_processing(self):
-        """Show processing state."""
+        """Show processing state (thread-safe)."""
+        self.after(0, self._show_processing_impl)
+
+    def _show_processing_impl(self):
+        """Internal implementation of show_processing."""
         self._cancel_error_timer()
         self._current_state = "processing"
         self.label.config(text="⏳ Traitement...", fg="#ffaa00")
@@ -79,7 +87,11 @@ class FeedbackWindow(tk.Tk):
         logger.debug("Showing processing state")
     
     def show_downloading(self, progress_percent):
-        """Show model download progress."""
+        """Show model download progress (thread-safe)."""
+        self.after(0, lambda: self._show_downloading_impl(progress_percent))
+
+    def _show_downloading_impl(self, progress_percent):
+        """Internal implementation of show_downloading."""
         self._cancel_error_timer()
         self._current_state = "downloading"
         self.label.config(text=f"📥 Téléchargement...\n{progress_percent}%", fg="#00aaff")
@@ -87,13 +99,11 @@ class FeedbackWindow(tk.Tk):
         logger.debug(f"Showing download progress: {progress_percent}%")
     
     def show_error(self, message, duration_ms=3000):
-        """
-        Show error message for specified duration.
-        
-        Args:
-            message: Error message to display
-            duration_ms: Duration in milliseconds before auto-hiding
-        """
+        """Show error message (thread-safe)."""
+        self.after(0, lambda: self._show_error_impl(message, duration_ms))
+
+    def _show_error_impl(self, message, duration_ms):
+        """Internal implementation of show_error."""
         self._cancel_error_timer()
         self._current_state = "error"
         self.label.config(text=f"❌ {message}", fg="#ff0000")
@@ -104,7 +114,11 @@ class FeedbackWindow(tk.Tk):
         self._error_timer = self.after(duration_ms, self.hide)
     
     def hide(self):
-        """Hide the window."""
+        """Hide the window (thread-safe)."""
+        self.after(0, self._hide_impl)
+
+    def _hide_impl(self):
+        """Internal implementation of hide."""
         self._cancel_error_timer()
         self._current_state = None
         self.withdraw()

@@ -5,6 +5,7 @@ Converts audio to text using Whisper model with optional download progress callb
 
 import logging
 import time
+import numpy as np
 from faster_whisper import WhisperModel
 from src.config import WHISPER_MODEL, WHISPER_LANGUAGE
 
@@ -60,9 +61,16 @@ class Transcriber:
             start_time = time.time()
             logger.info(f"Transcribing audio ({len(audio_data)/16000:.2f}s)")
             
+            # Whisper expects float32 normalized to [-1.0, 1.0]
+            # Convert int16 to float32 if needed
+            if audio_data.dtype == np.int16:
+                audio_float = audio_data.flatten().astype(np.float32) / 32768.0
+            else:
+                audio_float = audio_data.flatten().astype(np.float32)
+            
             # Transcribe with language constraint
             segments, info = self._model.transcribe(
-                audio_data,
+                audio_float,
                 language=WHISPER_LANGUAGE,
                 beam_size=5,
                 temperature=0

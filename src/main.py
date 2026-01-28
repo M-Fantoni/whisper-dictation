@@ -7,10 +7,10 @@ import logging
 import threading
 import signal
 import sys
-from src.config import logger, HOTKEY
+from src.config import logger, HOTKEY, TEXT_CLEANER_BACKEND, OLLAMA_MODEL, OLLAMA_BASE_URL
 from src.audio_capture import AudioCapture, InsufficientAudioError, BufferOverflowError
 from src.transcription import Transcriber
-from src.text_cleaner import TextCleaner
+from src.text_cleaner_factory import TextCleanerFactory
 from src.clipboard_manager import ClipboardManager
 from src.gui_feedback import FeedbackWindow
 from src.hotkey_manager import HotkeyManager
@@ -30,7 +30,23 @@ class WhisperDictationApp:
         self.gui = FeedbackWindow()
         self.audio = AudioCapture()
         self.transcriber = Transcriber(download_callback=self._on_download_progress)
-        self.cleaner = TextCleaner()
+        
+        # Initialize text cleaner using factory
+        try:
+            self.cleaner = TextCleanerFactory.create(
+                backend=TEXT_CLEANER_BACKEND,
+                model_name=OLLAMA_MODEL,
+                base_url=OLLAMA_BASE_URL
+            )
+            if self.cleaner:
+                logger.info(f"Text cleaner enabled: {TEXT_CLEANER_BACKEND}")
+            else:
+                logger.info("Text cleaner disabled")
+        except Exception as e:
+            logger.error(f"Failed to initialize text cleaner: {e}")
+            logger.warning("Continuing without text cleaner")
+            self.cleaner = None
+        
         self.clipboard = ClipboardManager()
         self.hotkey = HotkeyManager(hotkey_combo=HOTKEY, callback=self._on_hotkey)
         
@@ -84,12 +100,14 @@ class WhisperDictationApp:
         with self._state_lock:
             current_state = self._state
         
-        logger.debug(f"Hotkey pressed - current state: {current_state}")
+        logger.info(f"🔑 Hotkey pressed - current state: {current_state}")
         
         try:
             if current_state == "IDLE":
+                logger.info("→ Calling _start_listening()")
                 self._start_listening()
             elif current_state == "LISTENING":
+                logger.info("→ Calling _stop_listening()")
                 self._stop_listening()
             else:
                 logger.warning(f"Hotkey ignored in state: {current_state}")
@@ -100,13 +118,17 @@ class WhisperDictationApp:
     
     def _start_listening(self):
         """Transition to LISTENING state and start audio capture."""
+        logger.info("_start_listening() called")
         if not self._transition_state("IDLE", "LISTENING"):
+            logger.error("State transition failed")
             return
         
         try:
+            logger.info("Starting audio capture")
             self.audio.start_recording()
+            logger.info("Showing GUI listening state")
             self.gui.show_listening()
-            logger.info("Listening started")
+            logger.info("✅ Listening started successfully")
         except Exception as e:
             logger.error(f"Failed to start listening: {e}")
             self.gui.show_error("Mic indisponible")
@@ -162,8 +184,11 @@ class WhisperDictationApp:
                 self._set_state("IDLE")
                 return
             
-            # Step 2: Clean text
-            cleaned_text = self.cleaner.clean(raw_text)
+            # Step 2: Clean text (optional)
+            if self.cleaner:
+                cleaned_text = self.cleaner.clean(raw_text)
+            else:
+                cleaned_text = raw_text
             
             # Step 3: Paste to clipboard
             self.clipboard.paste_text(cleaned_text)

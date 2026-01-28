@@ -1,11 +1,14 @@
 # Whisper Dictation - Local Voice Dictation Tool
 
-A minimalist local voice-to-text dictation tool for Windows. Press Alt+W to record audio, and your speech is transcribed, cleaned, and automatically pasted at your cursor position.
+A minimalist local voice-to-text dictation tool for Windows. Press Alt+W to record audio, and your speech is transcribed and automatically pasted at your cursor position.
 
 ## Features
 
 - **🎤 Local Processing**: Audio is transcribed locally using OpenAI's Whisper model (small, CPU-only)
-- **🧹 Smart Cleanup**: Text is automatically corrected using OpenAI API (GPT-4o-mini) to remove filler words and fix grammar
+- **🧹 Optional Text Cleaning**: 
+  - **Disabled by default**: Whisper already removes filler words and adds punctuation
+  - **OpenAI GPT**: Cloud-based advanced cleaning (requires API key)
+  - **Ollama**: Free local AI cleaning (requires Ollama installation)
 - **⌨️ Global Hotkey**: Alt+W toggle to start/stop recording from anywhere
 - **🎯 Minimal GUI**: Simple feedback window shows recording and processing states
 - **💻 Cross-App Paste**: Works in any Windows application (VS Code, Notepad, browsers, etc.)
@@ -18,7 +21,8 @@ A minimalist local voice-to-text dictation tool for Windows. Press Alt+W to reco
 - **Windows 10+**: Currently Windows-only (pynput and sounddevice are cross-platform, but testing is Windows-only)
 - **Internet Connection**: Required for:
   - Whisper model download on first run (~460 MB)
-  - OpenAI API calls for text cleaning (optional fallback if unavailable)
+  - OpenAI API calls if using OpenAI text cleaner (optional)
+- **Ollama** (optional): For local AI text cleaning - [Download here](https://ollama.ai)
 
 ## Installation
 
@@ -49,23 +53,48 @@ For development (running tests):
 pip install -r requirements-dev.txt
 ```
 
-### 4. Set Up API Key
+### 4. Configure Text Cleaning (Optional)
 
-1. Copy the example environment file:
+By default, Whisper transcription is used without post-processing. To enable AI text cleaning:
 
-```bash
-copy .env.example .env
-```
+#### Option A: Ollama (Free, Local, Recommended)
 
-2. Open `.env` and add your OpenAI API key:
+1. **Install Ollama**:
+   ```bash
+   winget install Ollama.Ollama
+   ```
+   Or download from: https://ollama.ai
 
-```
-OPENAI_API_KEY=sk-your_actual_api_key_here
-```
+2. **Download a model** (one-time, ~2GB):
+   ```bash
+   ollama pull llama3.2:3b
+   ```
 
-Get your API key from: https://platform.openai.com/api-keys
+3. **Configure** in `.env`:
+   ```bash
+   copy .env.example .env
+   ```
+   Edit `.env`:
+   ```
+   TEXT_CLEANER_BACKEND=ollama
+   OLLAMA_MODEL=llama3.2:3b
+   ```
 
-**Important:** Keep your `.env` file secret. It is already in `.gitignore` and will not be committed.
+#### Option B: OpenAI GPT (Cloud-based)
+
+1. Get API key from: https://platform.openai.com/api-keys
+
+2. **Configure** in `.env`:
+   ```bash
+   copy .env.example .env
+   ```
+   Edit `.env`:
+   ```
+   TEXT_CLEANER_BACKEND=openai
+   OPENAI_API_KEY=sk-your_actual_api_key_here
+   ```
+
+**Note:** Whisper already removes filler words ("euh", "hmm") and adds punctuation. Text cleaning is most useful when you change your mind mid-sentence or produce complex grammatical structures.
 
 ## Usage
 
